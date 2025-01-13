@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { BizzComponent } from '../routes/bizz/bizz.component';
+import { BizzComponent } from '../routes/bizz/bizz-container/bizz.component';
 
 export const routes: Routes = [
   {

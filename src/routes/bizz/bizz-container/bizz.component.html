@@ -16,8 +16,13 @@
       Add Ticket
     </button>
   </form>
-  <ul id="ticketList" class="list-disc pl-5 mb-4 w-full max-w-md"></ul>
-  <button id="requestButton" class="bg-green-500 text-white px-4 py-2 rounded">
-    Make Request
-  </button>
+
+  @if (stockQuery.isPending()) {} @else if (stockQuery.isError()) { Error:
+  {{ stockQuery.error().message }}
+  } @if (stockQuery.data(); as daily) {
+  <h1>{{ daily["Meta Data"]["1. Information"] }}</h1>
+  <div>
+    <p>{{ daily["Time Series (Daily)"] }}</p>
+  </div>
+  @if (stockQuery.isFetching()) { Updating... } }
 </div>

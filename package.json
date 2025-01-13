@@ -21,6 +21,7 @@
     "@tanstack/angular-query-experimental": "^5.62.13",
     "@types/node": "^22.10.5",
     "dotenv": "^16.4.7",
+    "openai": "^4.77.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

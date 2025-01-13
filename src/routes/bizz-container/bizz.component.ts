@@ -1,6 +1,6 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { StockService } from '../../services/stock.service';
+import { StockService } from '../../../services/stock.service';
 import { injectQuery } from '@tanstack/angular-query-experimental';
 import { lastValueFrom } from 'rxjs';
 
@@ -9,7 +9,7 @@ import { lastValueFrom } from 'rxjs';
   templateUrl: './bizz.component.html',
   imports: [ReactiveFormsModule],
 })
-export class BizzComponent implements OnInit {
+export class BizzComponent  {
   private readonly stockService = inject(StockService);
 
   tickers = signal<string[]>([]);
@@ -18,12 +18,9 @@ export class BizzComponent implements OnInit {
   });
 
   stockQuery = injectQuery(() => ({
-    queryKey: ['stock'],
+    queryKey: ['stock', this.tickers],
     queryFn: () => lastValueFrom(this.stockService.getAggregates('AAPL')),
   }))
-  ngOnInit() {
-    this.stockQuery.data()
-  }
 
   addTicket() {
     if (this.stockForm.valid) {
@@ -39,7 +36,8 @@ export class BizzComponent implements OnInit {
   }
 
   requestTickets() {
-    console.log('Requesting with tickets:', this.tickers());
-    // Add your request logic here
+    this.tickers().forEach((ticket, index) => {
+      this.stockQuery.data()
+    })
   }
 }
